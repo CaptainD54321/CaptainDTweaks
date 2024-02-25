@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using BepInEx;
 using BepInEx.Configuration;
+using BepInEx.Logging;
 using CaptainDTweaks.Patches;
 using HarmonyLib;
 
@@ -15,10 +16,12 @@ public class Plugin : BaseUnityPlugin
     public const string PLUGIN_NAME = "CaptainD's Tweaks";
     public const string PLUGIN_VERSION = "0.1.0";
 
+    internal static ManualLogSource logger;
     internal static ConfigEntry<bool> foodOverflow;
 
     private void Awake()
     {
+        logger = Logger;
         // Plugin startup logic
         Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
         foodOverflow = Config.Bind("Settings","Food Overflow", true, "Makes eating food that would put your hunger above 100% not waste the excess, and instead \"overflow\" your hunger value, and then prevent eating until hunger is below 100% again");

@@ -1,5 +1,7 @@
 using System;
 using System.Net.NetworkInformation;
+using BepInEx;
+using BepInEx.Logging;
 using HarmonyLib;
 using SailwindModdingHelper;
 using UnityEngine;
