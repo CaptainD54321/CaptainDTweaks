@@ -9,7 +9,7 @@ namespace CaptainDTweaks;
 
 
 [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
-[BepInDependency("com.app24.sailwindmoddinghelper", ">=2.0.0")]
+[BepInDependency("com.app24.sailwindmoddinghelper", "2.0.0")]
 public class Plugin : BaseUnityPlugin
 {
     public const string PLUGIN_GUID = "com.captaind54321.tweaks";
@@ -19,12 +19,18 @@ public class Plugin : BaseUnityPlugin
     internal static ManualLogSource logger;
     internal static ConfigEntry<bool> foodOverflow;
 
+    internal static Harmony harmony;
+
     private void Awake()
     {
         logger = Logger;
         // Plugin startup logic
-        Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+        logger.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
         foodOverflow = Config.Bind("Settings","Food Overflow", true, "Makes eating food that would put your hunger above 100% not waste the excess, and instead \"overflow\" your hunger value, and then prevent eating until hunger is below 100% again");
-        Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),PLUGIN_GUID);
+        harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),PLUGIN_GUID);
+    }
+    private void OnDestroy() {
+        logger.LogInfo($"Destroying and unpatching {PLUGIN_GUID}");
+        harmony.UnpatchSelf();
     }
 }

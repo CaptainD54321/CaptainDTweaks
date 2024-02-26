@@ -17,3 +17,4 @@
 /home/desmond/Documents/Sailwind Modding/CaptainDTweaks/obj/Debug/netstandard2.0/CaptainDTweaks.csproj.CopyComplete
 /home/desmond/Documents/Sailwind Modding/CaptainDTweaks/obj/Debug/netstandard2.0/CaptainDTweaks.dll
 /home/desmond/Documents/Sailwind Modding/CaptainDTweaks/obj/Debug/netstandard2.0/CaptainDTweaks.pdb
+/home/desmond/Documents/Sailwind Modding/CaptainDTweaks/obj/Debug/netstandard2.0/CaptainDTweaks.sourcelink.json

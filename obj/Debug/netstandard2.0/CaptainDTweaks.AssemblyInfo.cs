@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("My first plugin")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3df5a49050c3e121d0e48956e1c6a12980ff534")]
 [assembly: System.Reflection.AssemblyProductAttribute("CaptainDTweaks")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CaptainDTweaks")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
