@@ -62,7 +62,7 @@ internal static class DrinkingPatch {
 }
 
 [HarmonyPatch(typeof(PlayerNeedsUI))]
-internal static class UIPatch {
+internal static class NeedsUIPatch {
     [HarmonyPatch("UpdateBars")]
     public static void Prefix(ref NeedsInfo __state) {
         __state = new NeedsInfo(PlayerNeeds.food,PlayerNeeds.water); // store the real food/water values in __state
