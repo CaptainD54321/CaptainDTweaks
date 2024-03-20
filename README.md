@@ -12,7 +12,13 @@ Current features:
   * Prevents dirt from building up on boats.
   * Note: Does not clean dirt off already dirty boats; just take your boat to the shipyard and have them clean it, or use your broom.
   * Disabled by default.
- 
+* Supply/Demand viewer
+  * Shows the values for supply and demand values at distant ports in the trade book (negative supply = demand).
+  * This uses the same system Raw Lion uses for the listed prices for goods, so note that the listed value is not the current supply value, but the value the number of days ago listed in the "days ago" column of the trade book.
+  * Note: When you first start the game with this mod installed, listed supply values for most ports will be blank; this is not a bug, it simply takes time for the new price reports with the supply values to reach ports; all supply values should populate properly within a few hours of gameplay.
+  * Enabled by default.
+
+
 All features can be enabled/disabled via config file or [BepinEx Configuration Manager](https://github.com/BepInEx/BepInEx.ConfigurationManager).
 
 I plan to update this mod with other tweaks and features I would like to add to this game, although I do not currently have a comprehensive list of everything I would like to add.

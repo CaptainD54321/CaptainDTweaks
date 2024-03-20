@@ -92,7 +92,7 @@ internal static class TradeUIPatches {
         Plugin.logger.LogInfo($"CaptainDTweaks.DemandViewer: Beginning to modify trade UI.");
         ///Plugin.logger.LogFatal("CAN ANYONE HEAR ME PLEASE LET ME OUT");
         Transform temp = ___ui.transform.Find("good details (right panel)/details UI");
-        if (temp == null) {Plugin.logger.LogFatal("CaptainDTweaks.DemandViewer: Could not find UI subsection");return;}
+        if (temp == null) {Plugin.logger.LogError("CaptainDTweaks.DemandViewer: Could not find UI subsection");return;}
         //Plugin.logger.LogInfo($"CaptainDTweaks.DemandViewer: Found UI subsection transform: {temp}");
         GameObject ui = temp.gameObject;
         if(ui == null) { // if its null I've fucked up, skip everything so we don't crash the player
