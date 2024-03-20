@@ -9,13 +9,15 @@ namespace CaptainDTweaks;
 
 
 [BepInPlugin(PLUGIN_GUID, PLUGIN_NAME, PLUGIN_VERSION)]
-[BepInDependency("com.app24.sailwindmoddinghelper", "2.0.0")]
+[BepInDependency("com.app24.sailwindmoddinghelper", "2.0.2")]
 public class Plugin : BaseUnityPlugin
 {
     public const string PLUGIN_GUID = "com.captaind54321.tweaks";
     public const string PLUGIN_NAME = "CaptainD's Tweaks";
     public const string PLUGIN_VERSION = "0.1.0";
 
+
+    internal static Plugin instance;
     internal static ManualLogSource logger;
     internal static ConfigEntry<bool> foodOverflow;
     internal static ConfigEntry<bool> noDirt;
@@ -25,6 +27,7 @@ public class Plugin : BaseUnityPlugin
 
     private void Awake()
     {
+        instance = this;
         logger = Logger;
         // Plugin startup logic
         //logger.LogInfo($"Plugin {PLUGIN_GUID} is loaded!"); 
