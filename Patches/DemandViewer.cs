@@ -26,9 +26,9 @@ internal static class MarketPatches {
         me.knownPrices[portIndex] = report;
     }
 
-    [HarmonyPatch("RecievePriceReports")]
+    [HarmonyPatch("ReceivePriceReports")]
     [HarmonyPrefix]
-    public static bool RecieveReportsFix(PriceReport[] reports, ref PriceReport[] ___knownPrices) 
+    public static bool ReceivePriceReports(PriceReport[] reports, ref PriceReport[] ___knownPrices) 
     {
         for (int i = 0; i < reports.Length; i++)
         {
