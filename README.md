@@ -17,6 +17,9 @@ Current features:
   * This uses the same system Raw Lion uses for the listed prices for goods, so note that the listed value is not the current supply value, but the value the number of days ago listed in the "days ago" column of the trade book.
   * Note: When you first start the game with this mod installed, listed supply values for most ports will be blank; this is not a bug, it simply takes time for the new price reports with the supply values to reach ports; all supply values should populate properly within a few hours of gameplay.
   * Enabled by default.
+* Hold Sprint
+  * Reverts the sprint button from being a toggle control to requiring you to hold down the button.
+  * Disabled by default.
 
 
 All features can be enabled/disabled via config file or [BepinEx Configuration Manager](https://github.com/BepInEx/BepInEx.ConfigurationManager).
