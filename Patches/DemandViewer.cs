@@ -28,13 +28,20 @@ internal static class MarketPatches {
 
     [HarmonyPatch("ReceivePriceReports")]
     [HarmonyPrefix]
-    public static bool ReceivePriceReports(PriceReport[] reports, ref PriceReport[] ___knownPrices) 
+    public static bool ReceivePriceReports(PriceReport[] reports, ref PriceReport[] ___knownPrices, ref IslandMarket __instance) 
     {
+        // Plugin.logger.LogInfo($"CaptainDTweaks.DemandViewer: receiving price reports at island {__instance.GetPortName()}");
         for (int i = 0; i < reports.Length; i++)
         {
+            // Plugin.logger.LogInfo($"CaptainDTweaks.DemandViewer: receiving price report for port {i}");
             if (reports[i] != null && reports[i].approved && (___knownPrices[i] == null || ___knownPrices[i].day <= reports[i].day))
             {
-                ___knownPrices[i] = new SupplyPriceReport(reports[i] as SupplyPriceReport ?? reports[i]);
+                // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer");
+                if (reports[i] is SupplyPriceReport) {
+                    ___knownPrices[i] = new SupplyPriceReport((SupplyPriceReport)reports[i]);
+                }
+                else ___knownPrices[i] = new PriceReport(reports[i]);
+                // ___knownPrices[i] = new SupplyPriceReport(reports[i] as SupplyPriceReport ?? reports[i]);
             }
         }
         return false;
@@ -50,7 +57,11 @@ internal static class TraderBoatPatches {
         {
             if (___currentIslandMarket.knownPrices[i] != null && ___currentIslandMarket.knownPrices[i].approved && (___carriedPriceReports[i] == null || ___currentIslandMarket.knownPrices[i].day >= ___carriedPriceReports[i].day))
             {
-                ___carriedPriceReports[i] = new SupplyPriceReport(___currentIslandMarket.knownPrices[i] as SupplyPriceReport ?? ___currentIslandMarket.knownPrices[i]);
+                if (___currentIslandMarket.knownPrices[i] is SupplyPriceReport) {
+                    ___carriedPriceReports[i] = new SupplyPriceReport((SupplyPriceReport)___currentIslandMarket.knownPrices[i]);
+                }
+                else ___carriedPriceReports[i] = new PriceReport(___currentIslandMarket.knownPrices[i]);
+                // ___carriedPriceReports[i] = new SupplyPriceReport(___currentIslandMarket.knownPrices[i] as SupplyPriceReport ?? ___currentIslandMarket.knownPrices[i]);
             }
         }
         return false;
@@ -317,7 +328,11 @@ public class SupplyPriceReport : PriceReport {
 
     public SupplyPriceReport():base() {}
     
-    public SupplyPriceReport(PriceReport report):base(report) {}
+    public SupplyPriceReport(PriceReport report):base(report) {
+        if (report is SupplyPriceReport) {
+            supplyValues = ((SupplyPriceReport)report).supplyValues.Clone() as float[];
+        }
+    }
 
     public SupplyPriceReport(SupplyPriceReport report):base(report) {
         if (report.supplyValues == null) {

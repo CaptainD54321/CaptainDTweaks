@@ -22,7 +22,6 @@ public class Plugin : BaseUnityPlugin
     internal static ConfigEntry<bool> foodOverflow;
     internal static ConfigEntry<bool> noDirt;
     internal static ConfigEntry<bool> supplyDemand;
-    internal static ConfigEntry<bool> holdSprint;
 
     internal static Harmony harmony;
 
@@ -35,7 +34,6 @@ public class Plugin : BaseUnityPlugin
         foodOverflow = Config.Bind("Settings","Food Overflow", true, "Makes eating food that would put your hunger above 100% not waste the excess, and instead \"overflow\" your hunger value, and then prevent eating until hunger is below 100% again");
         noDirt = Config.Bind("Settings","No Dirt", false, "Prevents dirt from accumulating on boats. NOTE: Does not clean already dirty boats.");
         supplyDemand = Config.Bind("Settings","Display Demand",true,"Makes the trade book display islands' supply or demand for commodities, as well as price.");
-        holdSprint = Config.Bind("Settings","Hold Sprint",false,"Reverts sprinting from a toggle keybind to only making the player sprint when the key is held down.");
         harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),PLUGIN_GUID);
     }
     private void OnDestroy() {

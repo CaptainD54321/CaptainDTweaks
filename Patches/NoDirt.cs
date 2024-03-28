@@ -10,6 +10,9 @@ namespace CaptainDTweaks.Patches;
 internal static class NoDirt {
     [HarmonyPatch("ApplyDailyDirt")]
     public static bool Prefix(CleanableObject __instance) {
-        return Plugin.noDirt.Value;
+        if (Plugin.noDirt.Value) {
+            __instance.CleanFully();
+        }
+        return !Plugin.noDirt.Value;
     }
 }
