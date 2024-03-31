@@ -20,7 +20,7 @@ public class Plugin : BaseUnityPlugin
     internal static Plugin instance;
     internal static ManualLogSource logger;
     internal static ConfigEntry<bool> foodOverflow;
-    internal static ConfigEntry<bool> noDirt;
+    internal static ConfigEntry<float> dirtReduction;
     internal static ConfigEntry<bool> supplyDemand;
 
     internal static Harmony harmony;
@@ -32,7 +32,7 @@ public class Plugin : BaseUnityPlugin
         // Plugin startup logic
         //logger.LogInfo($"Plugin {PLUGIN_GUID} is loaded!"); 
         foodOverflow = Config.Bind("Settings","Food Overflow", true, "Makes eating food that would put your hunger above 100% not waste the excess, and instead \"overflow\" your hunger value, and then prevent eating until hunger is below 100% again");
-        noDirt = Config.Bind("Settings","No Dirt", false, "Prevents dirt from accumulating on boats. NOTE: Does not clean already dirty boats.");
+        dirtReduction = Config.Bind("Settings","Dirt Reduction", 1.0f, new ConfigDescription("Reduces how fast dirt accumulates on boats; 100% = vanilla behavior, 0% = no dirt accumulation", new AcceptableValueRange<float>(0f,1f)));
         supplyDemand = Config.Bind("Settings","Display Demand",true,"Makes the trade book display islands' supply or demand for commodities, as well as price.");
         harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),PLUGIN_GUID);
     }
