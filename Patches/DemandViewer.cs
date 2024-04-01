@@ -330,7 +330,7 @@ public class SupplyPriceReport : PriceReport {
     
     public SupplyPriceReport(PriceReport report):base(report) {
         if (report is SupplyPriceReport) {
-            supplyValues = ((SupplyPriceReport)report).supplyValues.Clone() as float[];
+            supplyValues = ((SupplyPriceReport)report).supplyValues?.Clone() as float[];
         }
     }
 
@@ -339,10 +339,5 @@ public class SupplyPriceReport : PriceReport {
             Plugin.logger.LogError("SupplyPriceReport: report.supplyValues is null");
         }
         supplyValues = report.supplyValues.Clone() as float[];
-        /*supplyValues = new float[report.supplyValues.Length];
-        for (int i = 0; i < report.supplyValues.Length; i++)
-        {
-            supplyValues[i] = report.supplyValues[i];
-        }*/
     }
 }
