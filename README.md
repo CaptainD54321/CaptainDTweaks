@@ -8,10 +8,10 @@ Current features:
   * Currently, there is no way to see how much a bar is overflowing by, but I plan to implement that in a future update.
   * Overflow values are capped at 200% to prevent glitched food items (I'm looking at you, VOIDFISH) from overflowing food/water values to arbitrarily high values.
   * Enabled by default.
-* Dirt reduction:
-  * Adds a slider to control the rate dirt accumulates on boats.
-  * 100% = vanilla dirt accumulation, 0% = no dirt accumulation.
-  * Default value 100%
+* No dirt:
+  * Prevents dirt from building up on boats.
+  * Note: Will clean off existing dirt, but not immediately on activating; for perfomance reasons, the boat is cleaned every time the game tries to add dirt, which happens once per gameday.
+  * Disabled by default.
 * Supply/Demand viewer
   * Shows the values for supply and demand values at distant ports in the trade book (negative supply = demand).
   * This uses the same system Raw Lion uses for the listed prices for goods, so note that the listed value is not the current supply value, but the value the number of days ago listed in the "days ago" column of the trade book.
