@@ -250,29 +250,34 @@ public class SaveTweaks {
     // and then convert them all to PriceReports before they reach RL's save code so it doesn't have a stroke
     [HarmonyPatch("DoSaveGame")]
     [HarmonyPostfix]
-    public static IEnumerator Save(IEnumerator original) {
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Save code started.");
+    public static IEnumerator SaveGame(IEnumerator original) {
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Save code started.");
         original.MoveNext();
         CaptainDSaveContainer mySave = new CaptainDSaveContainer(); // initialize container
         TraderBoat[] traderBoats = SaveLoadManager.instance.GetPrivateField<TraderBoat[]>("traderBoats");
         //___busy = true;
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Cleaning up saved data.");
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Cleaning up saved data.");
 
         Port[] ports = Port.ports;
         // initialize fields
-        mySave.playerReports = new SupplyPriceReport[GameState.playerKnownPrices.Length];
+        // Plugin.logger.LogInfo($"CaptainDTweaks.DemandViewer: Null tests: GameState.playerKnownPrices: {GameState.playerKnownPrices == null}, Port.ports: {Port.ports == null}, traderBoats: {traderBoats == null}");
+        if (GameState.playerKnownPrices != null) {
+            mySave.playerReports = new SupplyPriceReport[GameState.playerKnownPrices.Length];
+        }
         mySave.marketKnownReports = new SupplyPriceReport[ports.Length][];
         mySave.traderBoatReports = new SupplyPriceReport[traderBoats.Length][];
 
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Fixing player reports.");
-        // store the player's known prices as SupplyPriceReports and then convert them to PriceReports for RL's save code
-        for (int i = 0; i < GameState.playerKnownPrices.Length; i++) {
-            if(GameState.playerKnownPrices[i] == null) continue;
-            mySave.playerReports[i] = GameState.playerKnownPrices[i] as SupplyPriceReport; // ?? new SupplyPriceReport(GameState.playerKnownPrices[i]);
-            GameState.playerKnownPrices[i] = new PriceReport(GameState.playerKnownPrices[i]);
+        if (GameState.playerKnownPrices != null) {
+            // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Fixing player reports.");
+            // store the player's known prices as SupplyPriceReports and then convert them to PriceReports for RL's save code
+            for (int i = 0; i < GameState.playerKnownPrices.Length; i++) {
+                if(GameState.playerKnownPrices[i] == null) continue;
+                mySave.playerReports[i] = GameState.playerKnownPrices[i] as SupplyPriceReport; // ?? new SupplyPriceReport(GameState.playerKnownPrices[i]);
+                GameState.playerKnownPrices[i] = new PriceReport(GameState.playerKnownPrices[i]);
+            }
         }
 
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Fixing port known reports");
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Fixing port known reports");
         //store the known prices for each report as SupplyPriceReports, and then convert them to PriceReports for RL
         foreach (Port port in ports) {
             if ((bool)port)
@@ -291,7 +296,7 @@ public class SaveTweaks {
             }
         }
 
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Fixing Traderboat reports");
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Fixing Traderboat reports");
         // store each TraderBoat's report as a SupplyPriceReport, and then convert it for RL
         for (int i = 0; i < traderBoats.Length; i++) {
             PriceReport[] reports = traderBoats[i].carriedPriceReports;
@@ -304,10 +309,10 @@ public class SaveTweaks {
             traderBoats[i].carriedPriceReports = reports;
         }
         //__state = mySave;
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Finished cleaning up.");
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Saving mod data.");
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Finished cleaning up.");
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Saving mod data.");
         ModSave.Save(Plugin.instance.Info,mySave);
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Running RL save code.");
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Running RL save code.");
         yield return original;        
     }
 }

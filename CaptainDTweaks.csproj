@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>CaptainDTweaks</AssemblyName>
     <Description>Tweaks and fixes for the game Sailwind</Description>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -18,7 +18,8 @@
       <HintPath>../SailwindModdingHelper/SailwindModdingHelper.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>../../../../../games/SteamLibrary/steamapps/common/Sailwind/Sailwind_Data/Managed/Assembly-CSharp.dll</HintPath>
+      <HintPath Condition="Exists('../../../../../games')">../../../../../games/SteamLibrary/steamapps/common/Sailwind/Sailwind_Data/Managed/Assembly-CSharp.dll</HintPath>
+      <HintPath Condition="Exists('../../../.steam')">../../../.steam/debian-installation/steamapps/common/Sailwind/Sailwind_Data/Managed/Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Oculus.VR">
       <HintPath>../../../../../games/SteamLibrary/steamapps/common/Sailwind/Sailwind_Data/Managed/Oculus.VR.dll</HintPath>
