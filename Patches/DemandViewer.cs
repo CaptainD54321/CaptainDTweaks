@@ -214,14 +214,14 @@ public class SaveTweaks {
             return;
         }
         
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Loading player known reports.");
-        for (int i = 0; i < GameState.playerKnownPrices.Length; i++) {
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Loading player known reports.");
+        /* for (int i = 0; i < GameState.playerKnownPrices.Length; i++) {
             if (saveContainer.playerReports[i] == null) continue;
             GameState.playerKnownPrices[i] = saveContainer.playerReports[i];
-        }
-        //GameState.playerKnownPrices = saveContainer.playerReports;
+        } */
+        GameState.playerKnownPrices = saveContainer.playerReports?.Clone() as PriceReport[];
 
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Loading port known reports.");
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Loading port known reports.");
         foreach (Port port in Port.ports) {
             if (port) {
                 IslandMarket market = port.GetComponent<IslandMarket>();
@@ -234,8 +234,8 @@ public class SaveTweaks {
             }
         }
 
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Loading trader boat reports.");
-        //Plugin.logger.LogInfo($"CaptainDTweaks.DemandViewer: Number of trader boats: {___traderBoats.Length}.");
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Loading trader boat reports.");
+        // Plugin.logger.LogInfo($"CaptainDTweaks.DemandViewer: Number of trader boats: {___traderBoats.Length}.");
         for (int i = 0; i < ___traderBoats.Length; i++) {
             //Plugin.logger.LogInfo($"CaptainDTweaks.DemandViewer: Loading reports for trader boat #{i}.");
             for (int j = 0; j < saveContainer.traderBoatReports[i].Length; j++) {
@@ -243,7 +243,7 @@ public class SaveTweaks {
                 ___traderBoats[i].carriedPriceReports[j] = saveContainer.traderBoatReports[i][j];
             }
         }
-        //Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Finished loading.");
+        // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Finished loading.");
     }
 
     // Prefix RL's save coroutine to save all SupplyPriceReports myself, 
