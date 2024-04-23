@@ -14,7 +14,7 @@ public class Plugin : BaseUnityPlugin
 {
     public const string PLUGIN_GUID = "com.captaind54321.tweaks";
     public const string PLUGIN_NAME = "CaptainD's Tweaks";
-    public const string PLUGIN_VERSION = "0.1.0";
+    public const string PLUGIN_VERSION = "1.0.4";
 
 
     internal static Plugin instance;

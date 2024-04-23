@@ -215,11 +215,13 @@ public class SaveTweaks {
         }
         
         // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Loading player known reports.");
-        /* for (int i = 0; i < GameState.playerKnownPrices.Length; i++) {
-            if (saveContainer.playerReports[i] == null) continue;
-            GameState.playerKnownPrices[i] = saveContainer.playerReports[i];
-        } */
-        GameState.playerKnownPrices = saveContainer.playerReports?.Clone() as PriceReport[];
+        if (saveContainer.playerReports != null) {
+            for (int i = 0; i < GameState.playerKnownPrices.Length; i++) {
+                if (saveContainer.playerReports[i] == null) continue;
+                GameState.playerKnownPrices[i] = saveContainer.playerReports[i];
+            }
+        }
+        //GameState.playerKnownPrices = (saveContainer.playerReports?.Clone()) as PriceReport[];
 
         // Plugin.logger.LogInfo("CaptainDTweaks.DemandViewer: Loading port known reports.");
         foreach (Port port in Port.ports) {
@@ -272,8 +274,9 @@ public class SaveTweaks {
             // store the player's known prices as SupplyPriceReports and then convert them to PriceReports for RL's save code
             for (int i = 0; i < GameState.playerKnownPrices.Length; i++) {
                 if(GameState.playerKnownPrices[i] == null) continue;
-                mySave.playerReports[i] = GameState.playerKnownPrices[i] as SupplyPriceReport; // ?? new SupplyPriceReport(GameState.playerKnownPrices[i]);
-                GameState.playerKnownPrices[i] = new PriceReport(GameState.playerKnownPrices[i]);
+                mySave.playerReports[i] = GameState.playerKnownPrices[i] as SupplyPriceReport;
+                var temp = new PriceReport(GameState.playerKnownPrices[i]);
+                GameState.playerKnownPrices[i] = temp;
             }
         }
 
