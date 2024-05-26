@@ -10,7 +10,7 @@ Current features:
   * Enabled by default.
 * No dirt:
   * Prevents dirt from building up on boats.
-  * Note: Will clean off existing dirt, but not immediately on activating; for perfomance reasons, the boat is cleaned every time the game tries to add dirt, which happens once per gameday.
+  * Note: Will clean off existing dirt, but not immediately on activating; for performance reasons, the boat is cleaned every time the game tries to add dirt, which happens once per gameday.
   * Disabled by default.
 * Supply/Demand viewer
   * Shows the values for supply and demand values at distant ports in the trade book (negative supply = demand).
